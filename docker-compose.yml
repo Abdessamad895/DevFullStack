@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  springboot-app:
+    image: springbackend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://database:3307/springboot
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - database
+
+  database:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=springboot
+
+  react-frontend:
+    image: frontend
+    ports:
+      - "3000:3000"
